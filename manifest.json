@@ -1,0 +1,38 @@
+{
+
+  "manifest_version": 2,
+  "name": "arXiv Flip",
+  "version": "1.0",
+
+  "description": "Set a keyboard shortcut to flip between viewing the pdf and abs of an arXiv paper, default is Ctrl/Cmd+Shift+U",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "arxiv-flip@saxon.me"
+    }
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+"permissions": [
+  "<all_urls>",
+  "tabs"
+],
+"icons": {
+  "48": "icons/border-48.png",
+  "96": "icons/border-96.png"
+},
+  "commands": {
+    "swap-abs": {
+      "suggested_key": { "default": "Ctrl+Shift+U" },
+      "description": "Send a 'toggle-feature' event to the extension"
+    }
+  },
+
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true
+  }
+}
