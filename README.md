@@ -6,9 +6,9 @@ Tired of being sent links to a pdf on arXiv when you want the abstract? Tired of
 
 1. Download the packaged extension from this repo
   1. Navigate to [releases](https://github.com/michaelsaxon/arxiv-flip-firefox/releases)
-  2. Download the latest .xpi file (signed Firefox extension)
-2. Manually install the file in Firefox
+  1. Download the latest .xpi file (signed Firefox extension)
+1. Manually install the file in Firefox
   1. Navigate to the [about:addons](about:addons) page
-  2. Click the gear icon in the top right corner
-  3. Click "Install add-on from file"
-  4. Select the downloaded .xpi file (e.g. arxiv_flip-1.0-fx.xpi)
+  1. Click the gear icon in the top right corner
+  1. Click "Install add-on from file"
+  1. Select the downloaded .xpi file (e.g. arxiv_flip-1.0-fx.xpi)
