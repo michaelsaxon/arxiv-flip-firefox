@@ -15,9 +15,11 @@ browser.commands.onCommand.addListener((command) => {
    if (url.includes("arxiv.org")) {
         newurl = url
     if (url.includes("/abs/")) {
-        newurl = newurl.replace("/abs/", "/pdf/").concat(".pdf")
-    } else if (url.includes("/pdf/") && url.includes(".pdf")) {
+        newurl = newurl.replace("/abs/", "/pdf/")
+    } else if (url.includes("/pdf/") {
         newurl = newurl.replace("/pdf/", "/abs/").replace(".pdf", "")
+    } else if (url.includes("/html/") {
+        newurl = newurl.replace("/html/", "/abs/")
     }
     browser.tabs.update(id, {url : newurl})
   }
