@@ -18,7 +18,10 @@
 
 "permissions": [
   "<all_urls>",
-  "tabs"
+  "tabs",
+  "webRequest",
+  "webRequestBlocking",
+  "storage"
 ],
 "icons": {
   "48": "icons/border-48.png",

@@ -1,21 +1,188 @@
 <!DOCTYPE html>
-
 <html>
   <head>
     <meta charset="utf-8">
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .container {
+        background-color: white;
+        width: 100%;
+        max-width: 600px;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #036;
+        border-bottom: 2px solid #b31b1b;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .section {
+        margin-bottom: 25px;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 6px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #036;
+      }
+
+      input[type="text"], textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #b31b1b;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      button {
+        background-color: #b31b1b;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #036;
+      }
+
+      .toggle-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+      }
+
+      .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .toggle-slider {
+        background-color: #b31b1b;
+      }
+
+      input:checked + .toggle-slider:before {
+        transform: translateX(26px);
+      }
+
+      #status {
+        text-align: center;
+        margin-top: 15px;
+        color: #b31b1b;
+        font-weight: bold;
+      }
+
+      .credits {
+        text-align: center;
+        font-size: 0.8em;
+        color: #666;
+        margin-top: 20px;
+      }
+    </style>
   </head>
-
 <body>
-  <h2>Most of the core code was taken from the Mozilla webextensions example "<a href="https://github.com/mdn/webextensions-examples/tree/master/commands">commands</a>."</h2>
+  <div class="container">
+    <h1>arXiv Flip Extension Settings</h1>
 
-  Please use this form to set the keyboard shortcut that will toggle between the /abs/ and /pdf/ page for an arXiv paper in an active tab in an active window:<br>
-  <form>
-      <label>Keyboard shortcut</label><br>
-      <input type="text" id="shortcut" ><br>
-      <button id="update">Update keyboard shortcut</button>
-      <button id="reset">Reset  keyboard shortcut</button><br>
-  </form>
+    <div class="section">
+      <h3>Keyboard Shortcut</h3>
+      <label for="shortcut">Set Keyboard Shortcut</label>
+      <input type="text" id="shortcut">
+      <button id="update">Update Shortcut</button>
+      <button id="reset">Reset Shortcut</button>
+    </div>
+
+    <div class="section">
+      <h3>Whitelisted Domains</h3>
+      <label for="whitelistDomains">Enter domains to redirect to arXiv abs page (one per line)</label>
+      <textarea id="whitelistDomains" placeholder="Example:
+twitter.com
+scholar.google.com
+reddit.com"></textarea>
+      <button id="saveWhitelist">Save Domains</button>
+      <button id="resetWhitelist">Reset to Default</button>
+    </div>
+
+    <div class="section">
+      <div class="toggle-section">
+        <label>AlphaXiv Redirect Mode</label>
+        <label class="toggle-switch">
+          <input type="checkbox" id="alphaxivToggle">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <p>When enabled, redirects and shortcuts will use alphaxiv.org instead of arxiv.org</p>
+    </div>
+
+    <div id="status"></div>
+
+    <div class="credits">
+      Inspired by the arXiv color palette<br>
+      Extension code based on Mozilla WebExtensions example
+    </div>
+  </div>
+
   <script src="options.js"></script>
 </body>
-
 </html>
