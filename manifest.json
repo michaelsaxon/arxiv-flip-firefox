@@ -24,8 +24,8 @@
   "storage"
 ],
 "icons": {
-  "48": "icons/border-48.png",
-  "96": "icons/border-96.png"
+  "48": "icons/flip-48.png",
+  "96": "icons/flip-96.png"
 },
   "commands": {
     "swap-abs": {
