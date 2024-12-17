@@ -5,7 +5,7 @@
     <style>
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background-color: #f5f5f5;
+        background-color: #800;
         margin: 0;
         padding: 20px;
         display: flex;
@@ -15,34 +15,39 @@
       }
 
       .container {
-        background-color: white;
+        background-color: #FEE;
         width: 100%;
         max-width: 600px;
-        padding: 30px;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
 
       h1 {
-        color: #036;
+        color: #600;
         border-bottom: 2px solid #b31b1b;
-        padding-bottom: 10px;
         margin-bottom: 20px;
         text-align: center;
       }
 
       .section {
         margin-bottom: 25px;
-        background-color: #f9f9f9;
-        padding: 20px;
+        padding-left: 20px;
+	padding-right: 20px;
         border-radius: 6px;
       }
 
       label {
         display: block;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         font-weight: bold;
-        color: #036;
+        color: #600;
+      }
+
+      label.tooltip {
+	color: #200;
+	font-weight: normal;
+	font-style: italic;
+	margin-bottom: 5px;
       }
 
       input[type="text"], textarea {
@@ -71,7 +76,7 @@
       }
 
       button:hover {
-        background-color: #036;
+        background-color: #600;
       }
 
       .toggle-section {
@@ -146,25 +151,31 @@
     <h1>arXiv Flip Extension Settings</h1>
 
     <div class="section">
-      <h3>Keyboard Shortcut</h3>
+      <h3>/abs/ to /pdf/ Toggle Shortcut</h3>
       <label for="shortcut">Set Keyboard Shortcut</label>
+      <label class="tooltip">Pressing this keyboard shortcut will toggle between the raw pdf url and the abs page.</label>
       <input type="text" id="shortcut">
       <button id="update">Update Shortcut</button>
       <button id="reset">Reset Shortcut</button>
     </div>
 
     <div class="section">
-      <h3>Whitelisted Domains</h3>
+      <h3>/abs/ Transformation Domains</h3>
       <label for="whitelistDomains">Enter domains to redirect to arXiv abs page (one per line)</label>
+      <label class="tooltip">Set the list of domains to apply the outbound link transformation on (for example, make pdf links from Twitter become abs links, but let them stay pdf links for Google Scholar, which isn't on the list.)</label>
       <textarea id="whitelistDomains" placeholder="Example:
 twitter.com
-scholar.google.com
-reddit.com"></textarea>
+x.com
+news.ycombinator.com
+reddit.com
+t.co
+bsky.app"></textarea>
       <button id="saveWhitelist">Save Domains</button>
       <button id="resetWhitelist">Reset to Default</button>
     </div>
 
     <div class="section">
+      <h3>alphaXiv Mode</h3>
       <div class="toggle-section">
         <label>AlphaXiv Redirect Mode</label>
         <label class="toggle-switch">
@@ -172,7 +183,7 @@ reddit.com"></textarea>
           <span class="toggle-slider"></span>
         </label>
       </div>
-      <p>When enabled, redirects and shortcuts will use alphaxiv.org instead of arxiv.org</p>
+      <label class="tooltip">When enabled, redirects and shortcuts will use alphaxiv.org instead of arxiv.org</label>
     </div>
 
     <div id="status"></div>

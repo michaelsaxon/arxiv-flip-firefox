@@ -2,9 +2,15 @@
 let WHITELISTED_DOMAINS = [
   'twitter.com',
   'x.com',
-  'scholar.google.com',
   'news.ycombinator.com',
-  'reddit.com'
+  'reddit.com',
+  't.co',
+  'bsky.app'
+];
+
+let TARGET_DOMAINS = [
+  'arxiv.org',
+  'alphaxiv.org'
 ];
 
 // Load configurations from storage
@@ -35,6 +41,11 @@ browser.storage.onChanged.addListener((changes, namespace) => {
 // Function to check if the URL is from a whitelisted domain
 function isWhitelistedDomain(url) {
   return WHITELISTED_DOMAINS.some(domain => url.includes(domain));
+}
+
+// Function to check if the URL is from a whitelisted domain
+function isArxivOrAlphaxiv(url) {
+  return TARGET_DOMAINS.some(domain => url.includes(domain));
 }
 
 // Function to extract arXiv ID from various URL formats
@@ -79,6 +90,7 @@ function extractArxivId(url) {
 }
 
 // Function to generate target URL based on mode and current URL
+// this should only be used for the toggling
 function generateTargetUrl(arxivId, currentUrl) {
   if (ALPHAXIV_MODE) {
     // In AlphaXiv mode
@@ -100,13 +112,16 @@ function generateTargetUrl(arxivId, currentUrl) {
   return null;
 }
 
+
 // Listener for webRequest to intercept and redirect links
 browser.webRequest.onBeforeRequest.addListener(
   function(details) {
     const url = details.url;
-    
+    if ( url.includes('/abs/') ) {
+      return null;
+    }
     // Check if it's from a whitelisted domain
-    if (isWhitelistedDomain(details.initiator || details.originUrl)) {
+    if (isWhitelistedDomain(details.originUrl)) {
       // Extract arXiv ID from Hugging Face or other links
       const arxivId = extractArxivId(url);
       
@@ -115,7 +130,12 @@ browser.webRequest.onBeforeRequest.addListener(
         const absLink = ALPHAXIV_MODE 
           ? `https://alphaxiv.org/abs/${arxivId}`
           : `https://arxiv.org/abs/${arxivId}`;
-        return { redirectUrl: absLink };
+	/*console.log('Attempting to redirect:', {
+	  originalUrl: url,
+	  arxivId: arxivId,
+	  redirectUrl: absLink
+	});*/
+        return { redirectUrl: absLink, requestHeaders: [ { name : 'Referer', value: url }, { name: 'Origin', value: url } ] };
       }
     }
     return { cancel: false };
