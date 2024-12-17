@@ -1,10 +1,10 @@
 {
 
   "manifest_version": 2,
-  "name": "arXiv Flip",
+  "name": "arXiv Hygiene",
   "version": "1.0",
 
-  "description": "Set a keyboard shortcut to flip between viewing the pdf and abs of an arXiv paper, default is Ctrl/Cmd+Shift+U",
+  "description": "Take inbound links to arXiv pdfs from social media websites and convert them into links to the abs page instead. Capture Huggingface papers links and map them to the arXiv or alphaXiv page as well. Set a keyboard shortcut to flip between viewing the pdf and abs of an arXiv paper, default is Ctrl/Cmd+Shift+U",
 
   "browser_specific_settings": {
     "gecko": {
